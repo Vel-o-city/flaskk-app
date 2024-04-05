@@ -76,6 +76,7 @@ def filter_users(branches, batches,roles,tenture):
 
     if roles !='':
         filtered_users=[user for user in filtered_users if user.get('role', '') == roles]
+    filtered_users.sort(key=lambda x: x.get('active_status', False), reverse=True)
     return filtered_users
 
 @app.route('/')
