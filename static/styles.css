@@ -1,0 +1,101 @@
+/* styles.css */
+body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.filters {
+    margin-bottom: 20px;
+}
+
+.filters label {
+    margin-right: 10px;
+}
+
+.multiselect {
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.select-box {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px;
+    width: 200px;
+    overflow: auto;
+    max-height: 150px;
+}
+
+.select-box select {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    cursor: pointer;
+    padding: 5px;
+    font-size: 16px; /* Adjust font size as needed */
+}
+
+.select-box select option {
+    padding: 5px 10px;
+}
+
+.over-select {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+}
+
+/* Style for selected options */
+.select-box select option:checked {
+    background-color: #007bff;
+    color: #fff;
+}
+
+/* Tick mark for selected options */
+.select-box select option:checked::before {
+    content: '\2714'; /* Unicode character for check mark */
+    margin-right: 5px;
+}
+
+button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 8px;
+}
+
+th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+

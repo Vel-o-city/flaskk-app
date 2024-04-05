@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.4);
+      }
+
+      .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px;
+        border-radius: 10px;
+        width: 30%;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      }
+
+      .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+      }
+
+      .close:hover,
+      .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      .table th {
+        background-color: #007bff;
+        color: #fff;
+      }
+
+      .table td {
+        vertical-align: middle;
+      }
+
+      .table .user-status {
+      font-size: 0.8rem;
+      padding: 2px 6px;
+      border-radius: 4px;
+      display: flex; /* Add this to make the span a flex container */
+      justify-content: center; /* Add this to horizontally center the content */
+      align-items: center; /* Add this to vertically center the content */
+      }
+
+      .table .user-status.active {
+        background-color: #28a745;
+        color: #fff;
+      }
+
+      .table .user-status.inactive {
+        background-color: #dc3545;
+        color: #fff;
+      }
+      .modal {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.4);
+        z-index: 9999; /* Ensure modal is on top of other content */
+        overflow: auto; /* Enable scrollbar if content overflows */
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border-radius: 10px;
+        max-width: 80%; /* Set maximum width for the modal content */
+        max-height: 80%; /* Set maximum height for the modal content */
+        overflow-y: auto; /* Enable vertical scrollbar if content overflows */
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="text-center mb-4"></h1>
+
+      <div class="form-inline justify-content-center mb-4">
+        <div class="form-group mr-3">
+          <label for="branch" class="mr-2">Branch:</label>
+          <select class="form-control" id="branch">
+            <option value="">All</option>
+            {% for branch in branches %}
+            <option value="{{ branch }}">{{ branch }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="form-group mr-3">
+          <label for="batch" class="mr-2">Batch:</label>
+          <select class="form-control" id="batch">
+            <option value="">All</option>
+            {% for batch in batches %}
+            <option value="{{ batch }}">{{ batch }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="form-group mr-3">
+          <label for="role" class="mr-2">Role:</label>
+          <select class="form-control" id="role">
+            <option value="">All</option>
+            {% for role in roles %}
+            <option value="{{ role }}">{{ role }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="form-group mr-3">
+          <label for="tenture" class="mr-2">Active Span:</label>
+          <select class="form-control" id="tenture">
+            {% for tenture in tentures %}
+            <option value="{{ tenture }}">{{ tenture }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <button class="btn btn-primary mr-3" id="reset-filters">Reset Filters</button>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+          <thead>
+            <tr>
+              <th>Email</th>
+              <th>Role</th>
+              <th>Last Login</th>
+              <th>Active Status</th>
+            </tr>
+          </thead>
+          <tbody id="user-data-table"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- <div id="user-detail-modal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h3 class="text-center mb-4">User Details</h3>
+        <div id="user-details" class="text-center"></div>
+      </div>
+    </div> -->
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+  </body>
+</html>
