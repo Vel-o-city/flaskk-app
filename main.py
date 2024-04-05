@@ -4,13 +4,17 @@ import pymongo
 from util import fetch_data,get_conversations_for_user
 from datetime import datetime, timedelta
 import pandas as pd
-
+from dotenv import load_dotenv
+import os
+load_dotenv()
 app = Flask(__name__)
-connectionString = "mongodb://65.2.116.84:27017/"
+connectionString=os.getenv("MONGO_URL")
 client = pymongo.MongoClient(connectionString)
 db = client['production']
-url_data='https://napi.prepseed.com/chats/getCustomFilterData?client=63ecdbe09465911b205459fe'
-url_sign='https://napi.prepseed.com/users/signin'
+url_data=os.getenv("URL_DATA")
+url_sign=os.getenv("URL_SIGN")
+email=os.getenv("EMAIL")
+pwd=os.getenv("PASSWORD")
 
 def is_user_active(last_message_time, active_span):
     try:
@@ -37,14 +41,8 @@ def is_user_active(last_message_time, active_span):
     last_active_datetime = current_datetime - active_duration
     return last_message_datetime >= last_active_datetime
 
-data={
-    "user":
-    {
-    "email": "prepseed-user@prepseed.com",
-    "password": "user@123"
-    },
-    "portal":"preparation"
-}
+data={"user":{"email": email,"password": pwd},"portal":"preparation"}
+print(data)
 resp=requests.post(url_sign, json=data).json()
 token=resp['token']
 headers = {
